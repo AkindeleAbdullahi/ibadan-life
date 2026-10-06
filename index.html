@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <title>IBADAN LIFE</title>
 
 <style>
@@ -12,416 +12,311 @@
     padding:0;
 }
 
-body{
-    font-family:Arial,sans-serif;
-    background:#050505;
-    color:white;
-    min-height:100vh;
-    overflow:hidden;
+:root{
+    --bg:#080808;
+    --panel:#111;
+    --panel2:#181818;
+    --border:#292929;
+    --text:#fff;
+    --muted:#929292;
+    --green:#35d07f;
+    --yellow:#f5c84b;
+    --red:#ff5757;
 }
 
-.screen{
-    min-height:100vh;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+button{
+    font:inherit;
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= LANDING ================= */
+
+#landing{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:
+        radial-gradient(circle at 50% 40%,#292929 0,#0d0d0d 45%,#030303 100%);
     display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
 }
 
+.landing-box{
+    width:min(520px,100%);
+    text-align:center;
+}
+
 .logo{
-    position:absolute;
-    top:25px;
-    left:25px;
-    font-size:24px;
-    font-weight:900;
-    letter-spacing:2px;
+    font-size:clamp(40px,12vw,75px);
+    font-weight:950;
+    letter-spacing:4px;
 }
 
 .logo span{
     color:#777;
 }
 
-.creator{
+.tag{
+    color:#999;
+    margin:12px 0 30px;
+    line-height:1.6;
+}
+
+.enter{
     width:100%;
-    max-width:500px;
+    padding:17px;
+    border:0;
+    border-radius:12px;
+    background:#fff;
+    color:#000;
+    font-weight:800;
+    font-size:16px;
+}
+
+.enter.secondary{
+    background:#171717;
+    color:white;
+    border:1px solid #333;
+    margin-top:10px;
+}
+
+/* ================= CREATOR ================= */
+
+#creator{
+    position:fixed;
+    inset:0;
+    z-index:90;
+    background:#070707;
+    overflow:auto;
+    padding:25px 15px;
+}
+
+.creator-box{
+    width:min(520px,100%);
+    margin:auto;
     background:#111;
     border:1px solid #292929;
-    border-radius:20px;
-    padding:28px;
-    box-shadow:0 20px 60px #000;
+    border-radius:18px;
+    padding:24px;
 }
 
-.creator h1{
-    font-size:32px;
-    margin-bottom:8px;
+.creator-box h1{
+    margin-bottom:7px;
 }
 
-.creator p{
+.creator-box p{
     color:#888;
-    margin-bottom:25px;
     line-height:1.5;
+    margin-bottom:22px;
 }
 
 label{
     display:block;
     color:#aaa;
-    font-size:13px;
+    font-size:12px;
     margin:16px 0 7px;
 }
 
 input,select{
-   ----
-   BUILDING
-------------------------- */
-
-function createBuilding(x,z,height){
-
-  const width =
-    14 + Math.random()*8;
-
-  const depth =
-    14 + Math.random()*8;
-
-  const building =
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        width,
-        height,
-        depth
-      ),
-      new THREE.MeshStandardMaterial({
-        color:
-          new THREE.Color().setHSL(
-            0.07,
-            0.18,
-            0.28+Math.random()*0.18
-          )
-      })
-    );
-
-  building.position.set(
-    x,
-    height/2,
-    z
-  );
-
-  scene.add(building);
-
-
-  /* ROOF */
-
-  const roof =
-    new THREE.Mesh(
-      new THREE.BoxGeometry(
-        width+1,
-        1,
-        depth+1
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x292929
-      })
-    );
-
-  roof.position.set(
-    x,
-    height+0.5,
-    z
-  );
-
-  scene.add(roof);
-
+    width:100%;
+    padding:14px;
+    border-radius:9px;
+    border:1px solid #333;
+    background:#080808;
+    color:#fff;
+    outline:none;
 }
 
-
-/* -------------------------
-   LANDMARK
-------------------------- */
-
-function createLandmark(x,z,name){
-
-  const group =
-    new THREE.Group();
-
-  const base =
-    new THREE.Mesh(
-      new THREE.BoxGeometry(22,4,22),
-      new THREE.MeshStandardMaterial({
-        color:0x202020
-      })
-    );
-
-  base.position.y=2;
-
-  group.add(base);
-
-
-  const tower =
-    new THREE.Mesh(
-      new THREE.BoxGeometry(8,18,8),
-      new THREE.MeshStandardMaterial({
-        color:0x555555
-      })
-    );
-
-  tower.position.y=13;
-
-  group.add(tower);
-
-
-  group.position.set(x,0,z);
-
-  scene.add(group);
-
+.gender{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
 }
 
-
-/* -------------------------
-   PLAYER
-------------------------- */
-
-function createPlayer(){
-
-  player =
-    new THREE.Group();
-
-
-  const body =
-    new THREE.Mesh(
-      new THREE.CapsuleGeometry(
-        0.8,
-        1.7,
-        4,
-        8
-      ),
-      new THREE.MeshStandardMaterial({
-        color:
-          localStorage.getItem("ibadanGender")==="female"
-          ? 0x8e44ad
-          : 0x202020
-      })
-    );
-
-  body.position.y=1.5;
-
-  player.add(body);
-
-
-  const head =
-    new THREE.Mesh(
-      new THREE.SphereGeometry(
-        0.55,
-        16,
-        16
-      ),
-      new THREE.MeshStandardMaterial({
-        color:0x6b4028
-      })
-    );
-
-  head.position.y=3.2;
-
-  player.add(head);
-
-
-  player.position.set(
-    0,
-    0,
-    0
-  );
-
-
-  scene.add(player);
-
+.gender button{
+    padding:14px;
+    border-radius:9px;
+    background:#0b0b0b;
+    color:#fff;
+    border:1px solid #333;
 }
 
-
-/* -------------------------
-   MOVEMENT
-------------------------- */
-
-function movePlayer(){
-
-  if(!player) return;
-
-  const speed=0.45;
-
-  if(keys.up)
-    player.position.z-=speed;
-
-  if(keys.down)
-    player.position.z+=speed;
-
-  if(keys.left)
-    player.position.x-=speed;
-
-  if(keys.right)
-    player.position.x+=speed;
-
-
-  camera.position.x +=
-    (player.position.x-camera.position.x)*0.08;
-
-  camera.position.z +=
-    (player.position.z+18-camera.position.z)*0.08;
-
-  camera.lookAt(
-    player.position.x,
-    1.5,
-    player.position.z
-  );
-
-
-  updateLocation();
-
+.gender button.active{
+    background:#fff;
+    color:#000;
 }
 
-
-function updateLocation(){
-
-  const x=player.position.x;
-  const z=player.position.z;
-
-  let area="Ibadan City";
-
-  if(x<-30 && z<-30)
-    area="Bodija";
-
-  else if(x>30 && z<-30)
-    area="Mokola";
-
-  else if(x<-30 && z>30)
-    area="Dugbe";
-
-  else if(x>30 && z>30)
-    area="Ring Road";
-
-  document.getElementById(
-    "location"
-  ).textContent="📍 "+area;
-
+.create-btn{
+    width:100%;
+    margin-top:22px;
+    padding:15px;
+    border:0;
+    border-radius:9px;
+    background:#fff;
+    color:#000;
+    font-weight:800;
 }
 
+/* ================= GAME ================= */
 
-/* -------------------------
-   KEYBOARD
-------------------------- */
-
-window.addEventListener(
-  "keydown",
-  e=>{
-
-    if(e.key==="w" || e.key==="ArrowUp")
-      keys.up=true;
-
-    if(e.key==="s" || e.key==="ArrowDown")
-      keys.down=true;
-
-    if(e.key==="a" || e.key==="ArrowLeft")
-      keys.left=true;
-
-    if(e.key==="d" || e.key==="ArrowRight")
-      keys.right=true;
-
-  }
-);
-
-
-window.addEventListener(
-  "keyup",
-  e=>{
-
-    if(e.key==="w" || e.key==="ArrowUp")
-      keys.up=false;
-
-    if(e.key==="s" || e.key==="ArrowDown")
-      keys.down=false;
-
-    if(e.key==="a" || e.key==="ArrowLeft")
-      keys.left=false;
-
-    if(e.key==="d" || e.key==="ArrowRight")
-      keys.right=false;
-
-  }
-);
-
-
-/* -------------------------
-   MOBILE CONTROLS
-------------------------- */
-
-document
-.querySelectorAll(".control")
-.forEach(button=>{
-
-  const direction =
-    button.dataset.key;
-
-  button.addEventListener(
-    "touchstart",
-    e=>{
-      e.preventDefault();
-      keys[direction]=true;
-    },
-    {passive:false}
-  );
-
-  button.addEventListener(
-    "touchend",
-    e=>{
-      e.preventDefault();
-      keys[direction]=false;
-    },
-    {passive:false}
-  );
-
-});
-
-
-/* -------------------------
-   GAME LOOP
-------------------------- */
-
-function animate(){
-
-  requestAnimationFrame(animate);
-
-  movePlayer();
-
-  renderer.render(
-    scene,
-    camera
-  );
-
+#game{
+    position:fixed;
+    inset:0;
+    display:none;
+    background:#000;
 }
 
-
-function resize(){
-
-  if(!camera || !renderer)
-    return;
-
-  camera.aspect =
-    window.innerWidth/
-    window.innerHeight;
-
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(
-    window.innerWidth,
-    window.innerHeight
-  );
-
+#scene{
+    position:absolute;
+    inset:0;
 }
 
+canvas{
+    display:block;
+}
 
-window.showMessage=function(message){
+/* ================= TOP HUD ================= */
 
-  alert(message);
+.top-hud{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    z-index:20;
+    padding:9px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:linear-gradient(#050505dd,#050505aa,transparent);
+}
 
-};
+.brand{
+    font-weight:900;
+    letter-spacing:1px;
+}
 
-</script>
+.world-info{
+    font-size:11px;
+    color:#bbb;
+}
 
-</body>
-</html>
+.stats{
+    display:flex;
+    gap:5px;
+}
+
+.stat{
+    padding:7px 9px;
+    background:#101010dd;
+    border:1px solid #292929;
+    border-radius:8px;
+    font-size:11px;
+}
+
+/* ================= NEEDS ================= */
+
+.needs{
+    position:absolute;
+    top:55px;
+    left:10px;
+    z-index:20;
+    width:145px;
+    background:#090909dd;
+    border:1px solid #292929;
+    border-radius:10px;
+    padding:9px;
+}
+
+.need{
+    margin-bottom:7px;
+}
+
+.need:last-child{
+    margin-bottom:0;
+}
+
+.need-line{
+    display:flex;
+    justify-content:space-between;
+    font-size:9px;
+    color:#aaa;
+    margin-bottom:3px;
+}
+
+.bar{
+    height:5px;
+    border-radius:5px;
+    background:#2a2a2a;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    width:80%;
+    background:#fff;
+}
+
+/* ================= LOCATION ================= */
+
+.location{
+    position:absolute;
+    top:58px;
+    right:10px;
+    z-index:20;
+    padding:8px 10px;
+    background:#090909dd;
+    border:1px solid #292929;
+    border-radius:8px;
+    font-size:11px;
+}
+
+/* ================= BOTTOM NAV ================= */
+
+.bottom-nav{
+    position:absolute;
+    z-index:30;
+    left:7px;
+    right:7px;
+    bottom:7px;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:5px;
+    background:#080808e8;
+    border:1px solid #292929;
+    border-radius:13px;
+    padding:5px;
+}
+
+.nav-btn{
+    border:0;
+    background:#141414;
+    color:#aaa;
+    border-radius:8px;
+    padding:9px 2px;
+    font-size:10px;
+}
+
+.nav-btn strong{
+    display:block;
+    font-size:17px;
+    margin-bottom:2px;
+}
+
+.nav-btn.active{
+    color:#fff;
+    background:#
