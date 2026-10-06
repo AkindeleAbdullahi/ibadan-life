@@ -2,321 +2,970 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IBADAN LIFE</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-:root{
-    --bg:#080808;
-    --panel:#111;
-    --panel2:#181818;
-    --border:#292929;
-    --text:#fff;
-    --muted:#929292;
-    --green:#35d07f;
-    --yellow:#f5c84b;
-    --red:#ff5757;
-}
-
-html,body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
-    color:white;
-    font-family:Arial,Helvetica,sans-serif;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#080808;
+  color:#fff;
+  min-height:100vh;
 }
 
 button{
-    font:inherit;
-    cursor:pointer;
+  border:0;
+  cursor:pointer;
+  font:inherit;
 }
 
-.hidden{
-    display:none!important;
+#app{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% 0%,#252525 0,#111 35%,#080808 75%);
 }
 
-/* ================= LANDING ================= */
-
-#landing{
-    position:fixed;
-    inset:0;
-    z-index:100;
-    background:
-        radial-gradient(circle at 50% 40%,#292929 0,#0d0d0d 45%,#030303 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.landing-box{
-    width:min(520px,100%);
-    text-align:center;
+/* TOP BAR */
+.topbar{
+  height:62px;
+  background:#101010;
+  border-bottom:1px solid #292929;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 
 .logo{
-    font-size:clamp(40px,12vw,75px);
-    font-weight:950;
-    letter-spacing:4px;
-}
-
-.logo span{
-    color:#777;
-}
-
-.tag{
-    color:#999;
-    margin:12px 0 30px;
-    line-height:1.6;
-}
-
-.enter{
-    width:100%;
-    padding:17px;
-    border:0;
-    border-radius:12px;
-    background:#fff;
-    color:#000;
-    font-weight:800;
-    font-size:16px;
-}
-
-.enter.secondary{
-    background:#171717;
-    color:white;
-    border:1px solid #333;
-    margin-top:10px;
-}
-
-/* ================= CREATOR ================= */
-
-#creator{
-    position:fixed;
-    inset:0;
-    z-index:90;
-    background:#070707;
-    overflow:auto;
-    padding:25px 15px;
-}
-
-.creator-box{
-    width:min(520px,100%);
-    margin:auto;
-    background:#111;
-    border:1px solid #292929;
-    border-radius:18px;
-    padding:24px;
-}
-
-.creator-box h1{
-    margin-bottom:7px;
-}
-
-.creator-box p{
-    color:#888;
-    line-height:1.5;
-    margin-bottom:22px;
-}
-
-label{
-    display:block;
-    color:#aaa;
-    font-size:12px;
-    margin:16px 0 7px;
-}
-
-input,select{
-    width:100%;
-    padding:14px;
-    border-radius:9px;
-    border:1px solid #333;
-    background:#080808;
-    color:#fff;
-    outline:none;
-}
-
-.gender{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-}
-
-.gender button{
-    padding:14px;
-    border-radius:9px;
-    background:#0b0b0b;
-    color:#fff;
-    border:1px solid #333;
-}
-
-.gender button.active{
-    background:#fff;
-    color:#000;
-}
-
-.create-btn{
-    width:100%;
-    margin-top:22px;
-    padding:15px;
-    border:0;
-    border-radius:9px;
-    background:#fff;
-    color:#000;
-    font-weight:800;
-}
-
-/* ================= GAME ================= */
-
-#game{
-    position:fixed;
-    inset:0;
-    display:none;
-    background:#000;
-}
-
-#scene{
-    position:absolute;
-    inset:0;
-}
-
-canvas{
-    display:block;
-}
-
-/* ================= TOP HUD ================= */
-
-.top-hud{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    z-index:20;
-    padding:9px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:linear-gradient(#050505dd,#050505aa,transparent);
-}
-
-.brand{
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-.world-info{
-    font-size:11px;
-    color:#bbb;
+  font-weight:900;
+  letter-spacing:1px;
+  font-size:19px;
 }
 
 .stats{
-    display:flex;
-    gap:5px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  font-size:12px;
 }
 
-.stat{
-    padding:7px 9px;
-    background:#101010dd;
-    border:1px solid #292929;
-    border-radius:8px;
-    font-size:11px;
+.money{color:#4ade80;font-weight:bold}
+.online{color:#60a5fa}
+
+/* LOCATION */
+.location{
+  padding:10px 14px;
+  background:#151515;
+  border-bottom:1px solid #242424;
+  color:#aaa;
+  font-size:13px;
 }
 
-/* ================= NEEDS ================= */
+/* CITY */
+.city{
+  margin:14px;
+  min-height:300px;
+  border-radius:18px;
+  border:1px solid #292929;
+  background:
+    linear-gradient(135deg,#343434 0 12%,transparent 12% 15%,#222 15% 28%,transparent 28% 31%,#303030 31% 47%,transparent 47% 51%,#202020 51% 67%,transparent 67% 71%,#292929 71%);
+  position:relative;
+  overflow:hidden;
+}
 
+.city:before{
+  content:"IBADAN";
+  position:absolute;
+  font-size:65px;
+  font-weight:900;
+  color:rgba(255,255,255,.035);
+  top:90px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.road{
+  position:absolute;
+  background:#111;
+}
+
+.road.h{
+  height:42px;
+  width:100%;
+  top:48%;
+}
+
+.road.v{
+  width:42px;
+  height:100%;
+  left:48%;
+}
+
+.player{
+  position:absolute;
+  width:38px;
+  height:38px;
+  background:#fff;
+  color:#111;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  left:48%;
+  top:43%;
+  box-shadow:0 0 0 5px rgba(255,255,255,.08);
+}
+
+.other{
+  position:absolute;
+  width:25px;
+  height:25px;
+  background:#555;
+  border-radius:50%;
+}
+
+/* NEEDS */
 .needs{
-    position:absolute;
-    top:55px;
-    left:10px;
-    z-index:20;
-    width:145px;
-    background:#090909dd;
-    border:1px solid #292929;
-    border-radius:10px;
-    padding:9px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+  padding:0 14px;
 }
 
 .need{
-    margin-bottom:7px;
-}
-
-.need:last-child{
-    margin-bottom:0;
-}
-
-.need-line{
-    display:flex;
-    justify-content:space-between;
-    font-size:9px;
-    color:#aaa;
-    margin-bottom:3px;
+  background:#141414;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:9px 4px;
+  text-align:center;
+  font-size:10px;
+  color:#aaa;
 }
 
 .bar{
-    height:5px;
-    border-radius:5px;
-    background:#2a2a2a;
-    overflow:hidden;
+  height:5px;
+  background:#333;
+  border-radius:5px;
+  margin-top:6px;
+  overflow:hidden;
 }
 
 .fill{
-    height:100%;
-    width:80%;
-    background:#fff;
+  height:100%;
+  width:75%;
+  background:#eee;
 }
 
-/* ================= LOCATION ================= */
-
-.location{
-    position:absolute;
-    top:58px;
-    right:10px;
-    z-index:20;
-    padding:8px 10px;
-    background:#090909dd;
-    border:1px solid #292929;
-    border-radius:8px;
-    font-size:11px;
+/* PANELS */
+.panel{
+  margin:14px;
+  background:#111;
+  border:1px solid #292929;
+  border-radius:16px;
+  padding:15px;
 }
 
-/* ================= BOTTOM NAV ================= */
-
-.bottom-nav{
-    position:absolute;
-    z-index:30;
-    left:7px;
-    right:7px;
-    bottom:7px;
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    gap:5px;
-    background:#080808e8;
-    border:1px solid #292929;
-    border-radius:13px;
-    padding:5px;
+.panel h2{
+  font-size:18px;
+  margin-bottom:12px;
 }
 
-.nav-btn{
-    border:0;
-    background:#141414;
-    color:#aaa;
-    border-radius:8px;
-    padding:9px 2px;
-    font-size:10px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
 }
 
-.nav-btn strong{
-    display:block;
-    font-size:17px;
-    margin-bottom:2px;
+.card{
+  background:#181818;
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:14px;
 }
 
-.nav-btn.active{
-    color:#fff;
-    background:#
+.card b{
+  display:block;
+  margin-bottom:6px;
+}
+
+.card span{
+  color:#999;
+  font-size:12px;
+}
+
+.action{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  background:#eee;
+  color:#111;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.dark{
+  background:#222;
+  color:#fff;
+}
+
+/* BOTTOM NAV */
+.nav{
+  position:sticky;
+  bottom:0;
+  z-index:30;
+  background:#101010;
+  border-top:1px solid #292929;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:7px 4px;
+}
+
+.nav button{
+  background:none;
+  color:#888;
+  padding:9px 3px;
+  font-size:11px;
+}
+
+.nav button.active{
+  color:#fff;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  z-index:50;
+  display:none;
+  align-items:flex-end;
+}
+
+.modal.show{display:flex}
+
+.sheet{
+  width:100%;
+  max-height:85vh;
+  overflow:auto;
+  background:#111;
+  border-radius:20px 20px 0 0;
+  padding:18px;
+  border-top:1px solid #333;
+}
+
+.close{
+  float:right;
+  background:#292929;
+  color:white;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #252525;
+}
+
+.item button{
+  background:#eee;
+  color:#111;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+/* CHARACTER */
+.start-screen{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#080808;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+}
+
+.start-box{
+  width:100%;
+  max-width:500px;
+}
+
+.start-box h1{
+  font-size:clamp(42px,12vw,75px);
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.start-box p{
+  color:#999;
+  line-height:1.6;
+  margin:15px 0 25px;
+}
+
+.start-box input,
+.start-box select{
+  width:100%;
+  background:#151515;
+  border:1px solid #333;
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:10px;
+  font-size:16px;
+}
+
+.start-box button{
+  width:100%;
+  padding:15px;
+  background:#fff;
+  color:#111;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+@media(max-width:500px){
+  .stats{gap:5px}
+  .logo{font-size:16px}
+  .city{min-height:260px}
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- START -->
+  <section class="start-screen" id="startScreen">
+    <div class="start-box">
+      <h1>IBADAN LIFE</h1>
+
+      <p>
+        Create your character and start your life in Ibadan.
+        Work, earn money, meet people, own property,
+        build businesses and create your own story.
+      </p>
+
+      <input id="playerName" placeholder="Enter your name">
+
+      <select id="playerGender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <button onclick="startLife()">START MY LIFE</button>
+    </div>
+  </section>
+
+  <!-- TOP -->
+  <header class="topbar">
+    <div class="logo">IBADAN LIFE</div>
+
+    <div class="stats">
+      <span id="clock">08:00</span>
+      <span class="money" id="money">₦5,000</span>
+      <span class="online">● <span id="online">1</span></span>
+    </div>
+  </header>
+
+  <div class="location" id="location">
+    📍 Bodija, Ibadan
+  </div>
+
+  <!-- CITY -->
+  <div class="city" id="city">
+    <div class="road h"></div>
+    <div class="road v"></div>
+
+    <div class="player" id="player">A</div>
+
+    <div class="other" style="left:20%;top:25%"></div>
+    <div class="other" style="left:75%;top:65%"></div>
+    <div class="other" style="left:30%;top:75%"></div>
+  </div>
+
+  <!-- NEEDS -->
+  <div class="needs">
+
+    <div class="need">
+      🍔<br>Hunger
+      <div class="bar"><div class="fill" id="hunger"></div></div>
+    </div>
+
+    <div class="need">
+      ⚡<br>Energy
+      <div class="bar"><div class="fill" id="energy"></div></div>
+    </div>
+
+    <div class="need">
+      🚿<br>Hygiene
+      <div class="bar"><div class="fill" id="hygiene"></div></div>
+    </div>
+
+    <div class="need">
+      🎮<br>Fun
+      <div class="bar"><div class="fill" id="fun"></div></div>
+    </div>
+
+    <div class="need">
+      👥<br>Social
+      <div class="bar"><div class="fill" id="social"></div></div>
+    </div>
+
+  </div>
+
+  <!-- QUICK ACTIONS -->
+  <section class="panel">
+
+    <h2>Quick Actions</h2>
+
+    <div class="grid">
+
+      <div class="card">
+        <b>💼 Work</b>
+        <span>Find a job and earn ₦</span>
+        <button class="action" onclick="openPanel('jobs')">Jobs</button>
+      </div>
+
+      <div class="card">
+        <b>🏠 Home</b>
+        <span>Manage your home</span>
+        <button class="action" onclick="openPanel('home')">Home</button>
+      </div>
+
+      <div class="card">
+        <b>🚗 Vehicles</b>
+        <span>Buy and manage vehicles</span>
+        <button class="action" onclick="openPanel('garage')">Garage</button>
+      </div>
+
+      <div class="card">
+        <b>📱 Phone</b>
+        <span>Your digital life</span>
+        <button class="action" onclick="openPanel('phone')">Phone</button>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- NAV -->
+  <nav class="nav">
+
+    <button onclick="openPanel('home')">
+      🏠<br>Home
+    </button>
+
+    <button onclick="openPanel('market')">
+      🛍️<br>Market
+    </button>
+
+    <button onclick="openPanel('map')">
+      🗺️<br>Map
+    </button>
+
+    <button onclick="openPanel('phone')">
+      📱<br>Phone
+    </button>
+
+    <button onclick="openPanel('profile')">
+      👤<br>Profile
+    </button>
+
+  </nav>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+  <div class="sheet">
+
+    <button class="close" onclick="closePanel()">×</button>
+
+    <div id="panelContent"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+let state = {
+  name:"",
+  gender:"male",
+  money:5000,
+  location:"Bodija, Ibadan",
+  job:"Unemployed",
+  hunger:80,
+  energy:80,
+  hygiene:80,
+  fun:80,
+  social:80,
+  inventory:[],
+  vehicle:null,
+  home:"Room",
+  phone:"Basic Phone"
+};
+
+function startLife(){
+
+  const name =
+    document.getElementById("playerName").value.trim();
+
+  if(!name){
+    alert("Enter your name first.");
+    return;
+  }
+
+  state.name=name;
+  state.gender=
+    document.getElementById("playerGender").value;
+
+  document.getElementById("player").textContent =
+    name.charAt(0).toUpperCase();
+
+  document.getElementById("startScreen").style.display="none";
+
+  updateUI();
+
+  alert("Welcome to Ibadan, " + name + "!");
+}
+
+function updateUI(){
+
+  document.getElementById("money").textContent =
+    "₦" + state.money.toLocaleString();
+
+  document.getElementById("location").textContent =
+    "📍 " + state.location;
+
+  setBar("hunger",state.hunger);
+  setBar("energy",state.energy);
+  setBar("hygiene",state.hygiene);
+  setBar("fun",state.fun);
+  setBar("social",state.social);
+}
+
+function setBar(id,value){
+
+  const el=document.getElementById(id);
+
+  if(el){
+    el.style.width =
+      Math.max(0,Math.min(100,value)) + "%";
+  }
+}
+
+function openPanel(type){
+
+  const content =
+    document.getElementById("panelContent");
+
+  let html="";
+
+  if(type==="home"){
+
+    html=`
+      <h2>🏠 My Home</h2>
+
+      <div class="card">
+        <b>${state.home}</b>
+        <span>Your current residence.</span>
+      </div>
+
+      <button class="action" onclick="rest()">
+        🛏️ Rest
+      </button>
+
+      <button class="action dark" onclick="alert('Home customization will be available in the full property system.')">
+        🛠️ Customize Home
+      </button>
+    `;
+  }
+
+  if(type==="jobs"){
+
+    html=`
+      <h2>💼 IB-Jobs</h2>
+
+      <div class="item">
+        <div>
+          <b>Delivery Rider</b><br>
+          <small>Earn ₦2,000 per shift</small>
+        </div>
+        <button onclick="takeJob('Delivery Rider',2000)">
+          Work
+        </button>
+      </div>
+
+      <div class="item">
+        <div>
+          <b>Taxi Driver</b><br>
+          <small>Earn ₦3,000 per shift</small>
+        </div>
+        <button onclick="takeJob('Taxi Driver',3000)">
+          Work
+        </button>
+      </div>
+
+      <div class="item">
+        <div>
+          <b>Mechanic</b><br>
+          <small>Earn ₦2,500 per shift</small>
+        </div>
+        <button onclick="takeJob('Mechanic',2500)">
+          Work
+        </button>
+      </div>
+
+      <div class="item">
+        <div>
+          <b>Chef</b><br>
+          <small>Earn ₦2,800 per shift</small>
+        </div>
+        <button onclick="takeJob('Chef',2800)">
+          Work
+        </button>
+      </div>
+
+      <div class="item">
+        <div>
+          <b>Freelancer</b><br>
+          <small>Earn ₦2,200 per job</small>
+        </div>
+        <button onclick="takeJob('Freelancer',2200)">
+          Work
+        </button>
+      </div>
+    `;
+  }
+
+  if(type==="market"){
+
+    html=`
+      <h2>🛍️ IB-Market</h2>
+
+      <div class="item">
+        <div>🍛 Food — ₦500</div>
+        <button onclick="buy('Food',500,'hunger',20)">Buy</button>
+      </div>
+
+      <div class="item">
+        <div>🥤 Drink — ₦300</div>
+        <button onclick="buy('Drink',300,'energy',10)">Buy</button>
+      </div>
+
+      <div class="item">
+        <div>🧴 Hygiene Kit — ₦700</div>
+        <button onclick="buy('Hygiene Kit',700,'hygiene',25)">Buy</button>
+      </div>
+
+      <div class="item">
+        <div>🎮 Game — ₦1,000</div>
+        <button onclick="buy('Game',1000,'fun',25)">Buy</button>
+      </div>
+    `;
+  }
+
+  if(type==="garage"){
+
+    html=`
+      <h2>🚗 IB-Garage</h2>
+
+      <div class="card">
+        <b>Vehicle</b>
+        <span>${state.vehicle || "No vehicle owned"}</span>
+      </div>
+
+      <div class="item">
+        <div>🚗 Old Sedan — ₦150,000</div>
+        <button onclick="buyVehicle('Old Sedan',150000)">
+          Buy
+        </button>
+      </div>
+
+      <div class="item">
+        <div>🏍️ Motorcycle — ₦80,000</div>
+        <button onclick="buyVehicle('Motorcycle',80000)">
+          Buy
+        </button>
+      </div>
+
+      <div class="item">
+        <div>🛺 Keke — ₦120,000</div>
+        <button onclick="buyVehicle('Keke',120000)">
+          Buy
+        </button>
+      </div>
+    `;
+  }
+
+  if(type==="map"){
+
+    html=`
+      <h2>🗺️ IB-Maps</h2>
+
+      ${[
+        "Bodija",
+        "Mokola",
+        "Dugbe",
+        "Challenge",
+        "Ring Road",
+        "Iwo Road",
+        "Eleyele",
+        "Apata",
+        "Oke-Ado",
+        "Agodi",
+        "Jericho",
+        "Oluyole",
+        "Akobo",
+        "Bashorun",
+        "UI / University Area",
+        "Ojoo",
+        "Monatan",
+        "Sango",
+        "Gate",
+        "Orita-Merin"
+      ].map(place=>`
+        <div class="item">
+          <div>📍 ${place}</div>
+          <button onclick="travel('${place}')">
+            Go
+          </button>
+        </div>
+      `).join("")}
+    `;
+  }
+
+  if(type==="phone"){
+
+    html=`
+      <h2>📱 IB-Phone</h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <b>💬 IB-Chat</b>
+          <span>Messages and groups</span>
+        </div>
+
+        <div class="card">
+          <b>📞 Calls</b>
+          <span>Call your contacts</span>
+        </div>
+
+        <div class="card">
+          <b>🏦 IBank</b>
+          <span>Balance: ₦${state.money.toLocaleString()}</span>
+        </div>
+
+        <div class="card">
+          <b>📸 IB-Gram</b>
+          <span>Social feed</span>
+        </div>
+
+        <div class="card">
+          <b>🚕 IB-Ride</b>
+          <span>Transport</span>
+        </div>
+
+        <div class="card">
+          <b>📰 IB-News</b>
+          <span>City news and events</span>
+        </div>
+
+      </div>
+    `;
+  }
+
+  if(type==="profile"){
+
+    html=`
+      <h2>👤 Profile</h2>
+
+      <div class="card">
+        <b>${state.name}</b>
+        <span>Gender: ${state.gender}</span>
+      </div>
+
+      <div class="card">
+        <b>Career</b>
+        <span>${state.job}</span>
+      </div>
+
+      <div class="card">
+        <b>Property</b>
+        <span>${state.home}</span>
+      </div>
+
+      <div class="card">
+        <b>Vehicle</b>
+        <span>${state.vehicle || "None"}</span>
+      </div>
+
+      <div class="card">
+        <b>Phone</b>
+        <span>${state.phone}</span>
+      </div>
+    `;
+  }
+
+  content.innerHTML=html;
+
+  document.getElementById("modal")
+    .classList.add("show");
+}
+
+function closePanel(){
+
+  document.getElementById("modal")
+    .classList.remove("show");
+}
+
+function takeJob(job,pay){
+
+  state.job=job;
+  state.money+=pay;
+  state.energy-=15;
+
+  updateUI();
+
+  alert(
+    "You completed a " +
+    job +
+    " shift and earned ₦" +
+    pay.toLocaleString()
+  );
+
+  openPanel("jobs");
+}
+
+function buy(name,cost,need,value){
+
+  if(state.money<cost){
+
+    alert("You don't have enough money.");
+    return;
+  }
+
+  state.money-=cost;
+  state.inventory.push(name);
+
+  state[need]=
+    Math.min(100,state[need]+value);
+
+  updateUI();
+
+  alert(name+" purchased.");
+}
+
+function buyVehicle(name,cost){
+
+  if(state.money<cost){
+
+    alert("You don't have enough money.");
+    return;
+  }
+
+  state.money-=cost;
+  state.vehicle=name;
+
+  updateUI();
+
+  alert("You now own a "+name+"!");
+
+  openPanel("garage");
+}
+
+function travel(place){
+
+  state.location=place+", Ibadan";
+
+  state.energy=Math.max(
+    0,
+    state.energy-5
+  );
+
+  updateUI();
+
+  alert("You travelled to "+place+".");
+
+  closePanel();
+}
+
+function rest(){
+
+  state.energy=
+    Math.min(100,state.energy+30);
+
+  state.hunger=
+    Math.max(0,state.hunger-5);
+
+  updateUI();
+
+  alert("You rested and recovered energy.");
+
+  closePanel();
+}
+
+/* GAME CLOCK */
+
+let minutes=480;
+
+setInterval(()=>{
+
+  minutes++;
+
+  if(minutes>=1440)
+    minutes=0;
+
+  let h=
+    Math.floor(minutes/60);
+
+  let m=
+    minutes%60;
+
+  document.getElementById("clock").textContent =
+    String(h).padStart(2,"0") +
+    ":" +
+    String(m).padStart(2,"0");
+
+  if(minutes%10===0){
+
+    state.hunger=Math.max(
+      0,
+      state.hunger-1
+    );
+
+    state.energy=Math.max(
+      0,
+      state.energy-1
+    );
+
+    state.social=Math.max(
+      0,
+      state.social-1
+    );
+
+    updateUI();
+  }
+
+},3000);
+
+</script>
+
+</body>
+</html>
